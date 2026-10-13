@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <title>Xendra Wallet</title>
+    <meta name="theme-color" content="#0f172a" />
+    <link rel="icon" href="/xendra-logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="tw-shell">
+      <div class="tw-phone">
+        <div id="onboarding" class="ob-root" aria-label="Setup">
+          <div class="ob-stage">
+          <div class="ob-step ob-step--splash" data-ob-step="splash">
+            <div class="ob-splash-center">
+              <div class="ob-splash-orbit" aria-hidden="true"></div>
+              <div class="ob-splash-orbit ob-splash-orbit--delay" aria-hidden="true"></div>
+              <img class="ob-splash-logo" src="/xendra-logo.png" width="72" height="72" alt="" />
+              <h1 class="ob-splash-title">Welcome</h1>
+              <p class="ob-splash-sub">xendra wallet</p>
+            </div>
+            <div class="ob-foot ob-foot--splash">
+              <button type="button" class="ob-btn ob-btn--primary ob-btn--pulse ob-splash-cta" id="ob-splash-continue">Continue</button>
+            </div>
+          </div>
+
+          <div class="ob-step" data-ob-step="setup" hidden>
+            <header class="ob-brand ob-anim-in">
+              <img src="/xendra-logo.png" width="32" height="32" alt="" />
+              <span>xendra</span>
+            </header>
+            <div class="ob-content ob-content--setup">
+              <p class="ob-kicker ob-anim-in ob-anim-d1">Get started</p>
+              <h1 class="ob-title ob-anim-in ob-anim-d2">Set up your wallet.</h1>
+              <p class="ob-lead ob-anim-in ob-anim-d3">
+                Next you'll secure this device, then connect your recovery phrase.
+              </p>
+            </div>
+            <div class="ob-foot ob-foot--setup">
+              <button type="button" class="ob-btn ob-btn--primary ob-btn--pulse" id="ob-setup-continue">Continue to setup</button>
+              <button type="button" class="ob-text-btn ob-text-btn--block" id="ob-setup-back">Back</button>
+            </div>
+          </div>
+
+          <div class="ob-step" data-ob-step="password" hidden>
+            <header class="ob-brand">
+              <img src="/xendra-logo.png" width="32" height="32" alt="" />
+              <span>xendra</span>
+            </header>
+            <div class="ob-content">
+              <p class="ob-kicker">App access</p>
+              <h1 class="ob-title" id="ob-pw-title">Welcome back.</h1>
+              <p class="ob-lead" id="ob-pw-sub">Enter your password to continue.</p>
+              <label class="ob-field">
+                <input type="password" id="ob-password" placeholder="Password" autocomplete="current-password" />
+              </label>
+              <p class="ob-err" id="ob-password-err" aria-live="polite"></p>
+            </div>
+            <div class="ob-foot ob-foot--split">
+              <button type="button" class="ob-text-btn" id="ob-password-back">Back</button>
+              <button type="button" class="ob-btn ob-btn--primary" id="ob-password-continue">Continue</button>
+            </div>
+          </div>
+
+          <div class="ob-step" data-ob-step="import" hidden>
+            <header class="ob-nav">
+              <button type="button" class="ob-nav-back" id="ob-import-back">Back</button>
+              <span class="ob-nav-title">Add wallet</span>
+              <span class="ob-nav-spacer" aria-hidden="true"></span>
+            </header>
+            <div class="ob-content ob-content--import">
+              <p class="ob-kicker">Recovery phrase</p>
+              <h1 class="ob-title ob-title--sm">Twelve or twenty-four words.</h1>
+              <label class="ob-phrase-wrap">
+                <textarea
+                  id="ob-import-phrase"
+                  rows="5"
+                  placeholder="word1 word2 …"
+                  autocomplete="off"
+                  spellcheck="false"
+                ></textarea>
+              </label>
+              <p class="ob-wordcount" id="ob-word-count">0 words</p>
+              <p class="ob-err" id="ob-import-err" aria-live="polite"></p>
+              <button type="button" class="ob-btn ob-btn--primary" id="ob-import-submit">Use this wallet</button>
+            </div>
+          </div>
+          </div>
+        </div>
+
+        <div id="app-chrome" hidden>
+        <header class="tw-header">
+          <button type="button" class="tw-wallet-picker" id="wallet-picker-btn" aria-haspopup="dialog" aria-label="Open wallet settings">
+            <span class="tw-wallet-name">Main Wallet</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 10l5 5 5-5"/></svg>
+          </button>
+        </header>
+
+        <main class="tw-main" id="app-main">
+          <div class="tw-panel is-active" data-panel="home">
+            <section class="tw-hero">
+              <div class="tw-hero-brand">
+                <img src="/xendra-logo.png" width="28" height="28" alt="" />
+                <span>xendra</span>
+              </div>
+              <p class="tw-hero-label">Total balance</p>
+              <div class="tw-hero-balance" id="balance">$0.00</div>
+              <p class="tw-hero-change up" id="change">+0.00% ($0.00)</p>
+            </section>
+
+            <div class="tw-actions">
+              <button type="button" class="tw-act" data-go="send">
+                <span class="tw-act-ico" aria-hidden="true">
+                  <svg class="tw-act-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 19V6" />
+                    <path d="m8 10 4-4 4 4" />
+                    <path d="M5 19h14" />
+                  </svg>
+                </span>
+                Send
+              </button>
+              <button type="button" class="tw-act" data-go="receive">
+                <span class="tw-act-ico" aria-hidden="true">
+                  <svg class="tw-act-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 5v13" />
+                    <path d="m8 14 4 4 4-4" />
+                    <path d="M5 5h14" />
+                  </svg>
+                </span>
+                Receive
+              </button>
+              <button type="button" class="tw-act" data-go="swap">
+                <span class="tw-act-ico" aria-hidden="true">
+                  <svg class="tw-act-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 10h11l-3-3" />
+                    <path d="M17 14H6l3 3" />
+                  </svg>
+                </span>
+                Swap
+              </button>
+            </div>
+
+            <div class="tw-sheet tw-sheet--home">
+              <div class="tw-seg" role="tablist">
+                <button type="button" class="is-active" role="tab" data-home-tab="crypto">Crypto</button>
+                <button type="button" role="tab" data-home-tab="nfts">NFTs</button>
+                <button type="button" role="tab" data-home-tab="activity">Activity</button>
+              </div>
+              <label class="tw-search">
+                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Zm0-2a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11Zm8.1 2.4-3.2-3.2 1.4-1.4 3.2 3.2-1.4 1.4Z"/></svg>
+                <input type="search" id="asset-search" placeholder="Search" autocomplete="off" spellcheck="false" />
+              </label>
+              <div id="home-pane-crypto" class="tw-home-pane">
+                <div id="addrs" class="tw-asset-list"></div>
+              </div>
+              <div id="home-pane-nfts" class="tw-home-pane" hidden>
+                <div id="nfts-list" class="tw-asset-list"></div>
+              </div>
+              <div id="home-pane-activity" class="tw-home-pane" hidden>
+                <div id="activity-list" class="tw-asset-list"></div>
+              </div>
+              <p class="tw-foot" id="wallet-state">Loading…</p>
+            </div>
+          </div>
+
+          <div class="tw-panel" data-panel="trending">
+            <div class="tw-sheet tw-sheet--full">
+              <h2 class="tw-page-title">Trending</h2>
+              <p class="tw-page-sub">Top movers · CoinGecko</p>
+              <div id="trending-list" class="tw-asset-list"></div>
+            </div>
+          </div>
+
+          <div class="tw-panel" data-panel="swap">
+            <div class="tw-sheet tw-sheet--full tw-sheet--scroll">
+              <h2 class="tw-page-title">Swap</h2>
+              <p class="tw-page-sub">LI.FI routes · sign in wallet</p>
+              <form class="tw-swapper" id="swap-form">
+                <div class="tw-swap-box tw-swap-box--from">
+                  <div class="tw-swap-box-head">
+                    <span>You pay</span>
+                    <button type="button" class="tw-link-btn" id="swap-max">Max</button>
+                  </div>
+                  <div class="tw-swap-box-row">
+                    <input type="text" inputmode="decimal" id="swap-amount-in" placeholder="0" autocomplete="off" />
+                    <label class="tw-token-pick">
+                      <img id="swap-from-icon" width="28" height="28" alt="" />
+                      <span id="swap-from-sym">SOL</span>
+                      <select id="swap-from" aria-label="From token"></select>
+                      <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 10l5 5 5-5"/></svg>
+                    </label>
+                  </div>
+                  <p class="tw-swap-fiat" id="swap-from-usd">≈ $0.00</p>
+                  <p class="tw-swap-bal" id="swap-from-bal">Balance: —</p>
+                </div>
+
+                <button type="button" class="tw-swap-flip" id="swap-flip" aria-label="Flip tokens">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25"><path d="M7 16V4m0 0-4 4m4-4 4 4M17 8v12m0 0 4-4m-4 4-4-4"/></svg>
+                </button>
+
+                <div class="tw-swap-box tw-swap-box--to">
+                  <div class="tw-swap-box-head"><span>You receive</span></div>
+                  <div class="tw-swap-box-row">
+                    <input type="text" id="swap-amount-out" placeholder="0" readonly tabindex="-1" />
+                    <label class="tw-token-pick">
+                      <img id="swap-to-icon" width="28" height="28" alt="" />
+                      <span id="swap-to-sym">ETH</span>
+                      <select id="swap-to" aria-label="To token"></select>
+                      <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 10l5 5 5-5"/></svg>
+                    </label>
+                  </div>
+                  <p class="tw-swap-fiat" id="swap-to-usd">≈ $0.00</p>
+                </div>
+
+                <div class="tw-swap-meta">
+                  <span id="swap-rate">Rate —</span>
+                  <label class="tw-slip">
+                    Slippage
+                    <select id="swap-slip">
+                      <option value="0.5">0.5%</option>
+                      <option value="1" selected>1%</option>
+                      <option value="3">3%</option>
+                    </select>
+                  </label>
+                </div>
+                <p class="tw-swap-route" id="swap-route">Route: —</p>
+                <button type="submit" class="tw-primary" id="swap-submit">Swap</button>
+              </form>
+            </div>
+          </div>
+
+          <div class="tw-panel" data-panel="earn">
+            <div class="tw-sheet tw-sheet--full">
+              <h2 class="tw-page-title">Earn</h2>
+              <p class="tw-page-sub">Staking &amp; yield (demo APY)</p>
+              <div id="earn-list" class="tw-card-list"></div>
+            </div>
+          </div>
+
+          <div class="tw-panel" data-panel="discover">
+            <div class="tw-sheet tw-sheet--full tw-sheet--scroll">
+              <h2 class="tw-page-title">Discover</h2>
+              <p class="tw-page-sub">AI briefings &amp; dApps</p>
+              <div class="tw-discover-scroll">
+                <div class="tw-section-head-row">
+                  <h3 class="tw-section-head">AI Briefings</h3>
+                  <button type="button" class="tw-link-btn" id="briefings-refresh">Refresh</button>
+                </div>
+                <div class="tw-brief-compose">
+                  <textarea id="briefings-custom" rows="3" placeholder="Compose: e.g. focus on SOL DeFi, low risk, 24h outlook…"></textarea>
+                  <button type="button" class="tw-primary tw-primary--sm" id="brief-compose">Compose briefing</button>
+                </div>
+                <div id="briefings-list" class="tw-brief-list"></div>
+                <h3 class="tw-section-head tw-section-head--gap">dApps &amp; DeFi</h3>
+                <div id="discover-list" class="tw-card-list tw-card-list--inline"></div>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <nav class="tw-nav" aria-label="Main" id="main-nav">
+          <button type="button" class="is-active" data-tab="home">
+            <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12 3 3 10.5V21h7v-6h4v6h7V10.5L12 3Z"/></svg>
+            <span>Home</span>
+          </button>
+          <button type="button" data-tab="trending">
+            <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M3 17h4v4H3v-4Zm7 0h4v4h-4v-4Zm7 0h4v4h-4v-4ZM3 10h4v4H3v-4Zm7 0h4v4h-4v-4Zm7 0h4v4h-4v-4ZM3 3h4v4H3V3Zm7 0h4v4h-4V3Zm7 0h4v4h-4V3Z"/></svg>
+            <span>Trending</span>
+          </button>
+          <button type="button" data-tab="swap">
+            <svg viewBox="0 0 24 24" width="22" height="22"><path fill="none" stroke="currentColor" stroke-width="2" d="M7 10h11l-3-3M17 14H6l3 3"/></svg>
+            <span>Swap</span>
+          </button>
+          <button type="button" data-tab="earn">
+            <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12 2 3 7v10l9 5 9-5V7l-9-5Zm0 2.2 6.5 3.6L12 11.4 5.5 7.8 12 4.2ZM5 9.3l6 3.3v6.8l-6-3.3V9.3Zm14 0v6.8l-6 3.3v-6.8l6-3.3Z"/></svg>
+            <span>Earn</span>
+          </button>
+          <button type="button" data-tab="discover">
+            <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 5v5.6l4.5 2.6-.9 1.6L11 13V7h2Z"/></svg>
+            <span>Discover</span>
+          </button>
+        </nav>
+        </div>
+
+        <div id="send-sheet" class="tw-wallet-hub tw-send-sheet" hidden role="dialog" aria-labelledby="send-sheet-title">
+          <div class="tw-wallet-hub-backdrop" id="send-sheet-backdrop"></div>
+          <div class="tw-wallet-hub-panel">
+            <header class="tw-wallet-hub-head">
+              <h2 id="send-sheet-title">Send</h2>
+              <button type="button" class="tw-icon-btn" id="send-sheet-close" aria-label="Close">✕</button>
+            </header>
+            <form id="send-form" class="tw-send-form">
+              <label class="tw-hub-field">
+                <span>Network</span>
+                <select id="send-asset" aria-label="Asset"></select>
+              </label>
+              <label class="tw-hub-field">
+                <span>To address</span>
+                <input type="text" id="send-to" placeholder="Address" autocomplete="off" spellcheck="false" />
+              </label>
+              <label class="tw-hub-field">
+                <span>Amount</span>
+                <div class="tw-send-amt-row">
+                  <input type="text" inputmode="decimal" id="send-amount" placeholder="0" autocomplete="off" />
+                  <button type="button" class="tw-link-btn" id="send-max">Max</button>
+                </div>
+              </label>
+              <p class="tw-send-bal" id="send-bal">Balance: —</p>
+              <button type="submit" class="tw-primary" id="send-submit">Send</button>
+            </form>
+          </div>
+        </div>
+
+        <div id="wallet-hub" class="tw-wallet-hub" hidden role="dialog" aria-labelledby="wallet-hub-title">
+          <div class="tw-wallet-hub-backdrop" id="wallet-hub-backdrop"></div>
+          <div class="tw-wallet-hub-panel">
+            <header class="tw-wallet-hub-head">
+              <button type="button" class="tw-icon-btn tw-hub-back" id="wallet-hub-back" hidden aria-label="Back">←</button>
+              <h2 id="wallet-hub-title">Wallets</h2>
+              <button type="button" class="tw-icon-btn" id="wallet-hub-close" aria-label="Close">✕</button>
+            </header>
+
+            <div id="wallet-hub-main">
+              <p class="tw-hub-label">Your wallets</p>
+              <div id="wallet-list" class="tw-wallet-list"></div>
+
+              <p class="tw-hub-label">Add wallet</p>
+              <div class="tw-hub-actions">
+                <button type="button" class="tw-hub-btn" id="wallet-action-import">Import recovery phrase</button>
+              </div>
+
+              <p class="tw-hub-label">Active wallet</p>
+              <div class="tw-hub-settings">
+                <button type="button" class="tw-hub-row" id="wallet-action-backup">
+                  <span>Backup secret phrase</span>
+                  <span class="tw-hub-chevron">›</span>
+                </button>
+                <button type="button" class="tw-hub-row" id="wallet-action-rename">
+                  <span>Rename wallet</span>
+                  <span class="tw-hub-chevron">›</span>
+                </button>
+                <button type="button" class="tw-hub-row" id="wallet-action-lock">
+                  <span>Lock wallet</span>
+                  <span class="tw-hub-chevron">›</span>
+                </button>
+                <button type="button" class="tw-hub-row tw-hub-row--danger" id="wallet-action-remove">
+                  <span>Remove wallet from device</span>
+                </button>
+              </div>
+              <p class="tw-hub-foot">Never share your recovery phrase. Anyone with it can steal your funds.</p>
+            </div>
+
+            <div id="wallet-hub-backup" hidden>
+              <p class="tw-hub-warn">Write down these 12 words in order. Do not screenshot or store online.</p>
+              <label class="tw-hub-check">
+                <input type="checkbox" id="wallet-backup-risk" />
+                <span>I understand that sharing my phrase means losing my funds</span>
+              </label>
+              <p class="tw-hub-phrase" id="wallet-backup-phrase" hidden></p>
+              <div class="tw-hub-actions">
+                <button type="button" class="tw-hub-btn" id="wallet-backup-reveal">Reveal phrase</button>
+                <button type="button" class="tw-hub-btn tw-hub-btn--ghost" id="wallet-backup-copy">Copy phrase</button>
+              </div>
+            </div>
+
+            <div id="wallet-hub-import" hidden>
+              <label class="tw-hub-field">
+                <span>Wallet name</span>
+                <input type="text" id="wallet-import-name" autocomplete="off" />
+              </label>
+              <label class="tw-hub-field">
+                <span>Recovery phrase</span>
+                <textarea id="wallet-import-phrase" rows="4" placeholder="12 or 24 words…" autocomplete="off" spellcheck="false"></textarea>
+              </label>
+              <button type="button" class="tw-hub-btn tw-primary" id="wallet-import-submit">Import wallet</button>
+            </div>
+
+            <div id="wallet-hub-rename" hidden>
+              <label class="tw-hub-field">
+                <span>Name</span>
+                <input type="text" id="wallet-rename-input" autocomplete="off" />
+              </label>
+              <button type="button" class="tw-hub-btn tw-primary" id="wallet-rename-save">Save</button>
+            </div>
+
+            <div id="wallet-hub-remove" hidden>
+              <p class="tw-hub-warn">This removes the wallet from this device only. Your on-chain funds stay on the networks.</p>
+              <p class="tw-page-sub tw-hub-remove-sub">Save your recovery phrase before continuing — you cannot recover it here after removal.</p>
+              <div class="tw-hub-actions tw-hub-actions--stack">
+                <button type="button" class="tw-hub-btn tw-hub-btn--danger" id="wallet-remove-confirm">Remove from device</button>
+                <button type="button" class="tw-hub-btn tw-hub-btn--ghost" id="wallet-remove-cancel">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="dapp-browser" class="tw-browser" hidden>
+        <header class="tw-browser-bar">
+          <button type="button" class="tw-icon-btn" id="browser-back" aria-label="Back">←</button>
+          <div class="tw-browser-meta">
+            <span id="browser-title" class="tw-browser-title">dApp</span>
+            <span id="browser-status" class="tw-browser-status"></span>
+          </div>
+          <button type="button" class="tw-link-btn" id="browser-reload">Reload</button>
+          <button type="button" class="tw-link-btn" id="browser-open-ext">Safari</button>
+          <button type="button" class="tw-icon-btn" id="browser-close" aria-label="Close">✕</button>
+        </header>
+        <iframe id="browser-frame" class="tw-browser-frame" title="dApp browser" allow="clipboard-read; clipboard-write; fullscreen"></iframe>
+      </div>
+      <div class="tw-toast" id="toast" hidden role="status"></div>
+    </div>
+    <script type="module" src="/app.mjs"></script>
+  </body>
+</html>

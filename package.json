@@ -1,0 +1,22 @@
+{
+  "name": "xendra-wallet-core",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server.mjs",
+    "dev:vite": "vite --host 127.0.0.1 --port 8790",
+    "build": "vite build",
+    "build:ext": "vite build --mode extension && node scripts/sync-ext.mjs",
+    "preview": "vite preview --host 127.0.0.1 --port 8790"
+  },
+  "dependencies": {
+    "@solana/web3.js": "^1.99.0",
+    "@trustwallet/wallet-core": "^4.3.19",
+    "ethers": "^6.17.0"
+  },
+  "devDependencies": {
+    "vite": "^6.0.0",
+    "vite-plugin-top-level-await": "^1.4.4",
+    "vite-plugin-wasm": "^3.4.1"
+  }
+}
